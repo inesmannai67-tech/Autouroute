@@ -1,0 +1,26 @@
+package com.example.autouroute.ui.theme
+
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.lightColorScheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+
+private val LightColorScheme = lightColorScheme(
+    primary = Primary,
+    onPrimary = Color.White,
+    surface = Color.White,
+    onSurface = TextDark,
+    background = Color.White,
+    onBackground = TextDark
+)
+
+@Composable
+fun AutourouteTheme(
+    content: @Composable () -> Unit
+) {
+    MaterialTheme(
+        colorScheme = LightColorScheme,
+        typography = Typography,
+        content = content
+    )
+}
