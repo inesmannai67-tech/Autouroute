@@ -23,19 +23,27 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import android.widget.Toast
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.example.autouroute.data.ApiClient
 import com.example.autouroute.data.Strings
+import kotlinx.coroutines.launch
 import com.example.autouroute.ui.theme.OtpGray
 import com.example.autouroute.ui.theme.Primary
 import com.example.autouroute.ui.theme.TextDark
 
 @Composable
 fun AuthDialog(
+    phone: String,
     onDismiss: () -> Unit,
     onValidate: () -> Unit
 ) {
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val coroutineScope = androidx.compose.runtime.rememberCoroutineScope()
+    var isLoading by mutableStateOf(false)
     var code by mutableStateOf("")
+
     Dialog(onDismissRequest = onDismiss) {
         Column(
             modifier = Modifier
@@ -82,11 +90,39 @@ fun AuthDialog(
                     Text(Strings.ANNULER, fontSize = 18.sp)
                 }
                 Button(
-                    onClick = onValidate,
+                    onClick = {
+                        if (code.length < 4) {
+                            Toast.makeText(context, "Code invalide", Toast.LENGTH_SHORT).show()
+                            return@Button
+                        }
+                        
+                        isLoading = true
+                        coroutineScope.launch {
+                            val (success, message) = ApiClient.authRequest(
+                                action = "verify",
+                                phone = phone,
+                                code = code
+                            )
+                            isLoading = false
+                            
+                            if (success) {
+                                onValidate()
+                            } else {
+                                Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+                            }
+                        }
+                    },
                     modifier = Modifier.weight(1f),
                     colors = ButtonDefaults.buttonColors(containerColor = Primary)
                 ) {
-                    Text(Strings.VALIDER, fontSize = 18.sp, color = Color.White)
+                    if (isLoading) {
+                        androidx.compose.material3.CircularProgressIndicator(
+                            color = Color.White,
+                            modifier = Modifier.size(24.dp)
+                        )
+                    } else {
+                        Text(Strings.VALIDER, fontSize = 18.sp, color = Color.White)
+                    }
                 }
             }
         }

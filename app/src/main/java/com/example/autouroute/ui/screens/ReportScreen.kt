@@ -88,7 +88,7 @@ fun ReportScreen(
             .background(bg)
             .verticalScroll(rememberScrollState())
     ) {
-        AppHeader(dark = isDark)
+        AppHeader()
         Column(
             modifier = Modifier
                 .fillMaxWidth()

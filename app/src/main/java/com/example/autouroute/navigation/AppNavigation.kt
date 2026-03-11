@@ -35,14 +35,18 @@ import com.example.autouroute.ui.screens.WelcomeScreen
 fun AppNavigation() {
     val navController = rememberNavController()
     var showAuthDialog by remember { mutableStateOf(false) }
+    var currentAuthPhone by remember { mutableStateOf("") }
     var currentTab by remember { mutableIntStateOf(0) }
 
     if (showAuthDialog) {
         AuthDialog(
+            phone = currentAuthPhone,
             onDismiss = { showAuthDialog = false },
             onValidate = {
                 showAuthDialog = false
-                navController.navigate(Routes.MAIN) { popUpTo(Routes.REGISTER) { inclusive = true } }
+                navController.navigate(Routes.WELCOME) { 
+                    popUpTo(Routes.REGISTER) { inclusive = true } 
+                }
             }
         )
     }
@@ -53,16 +57,19 @@ fun AppNavigation() {
         modifier = Modifier
     ) {
         composable(Routes.LANGUAGE) {
-            LanguageScreen(onValider = { navController.navigate(Routes.WELCOME) })
-        }
-        composable(Routes.WELCOME) {
-            WelcomeScreen(onDecouvrir = { navController.navigate(Routes.REGISTER) })
+            LanguageScreen(onValider = { navController.navigate(Routes.REGISTER) })
         }
         composable(Routes.REGISTER) {
             RegisterScreen(
                 onValider = {},
-                onAuthRequest = { showAuthDialog = true }
+                onAuthRequest = { phone -> 
+                    currentAuthPhone = phone
+                    showAuthDialog = true 
+                }
             )
+        }
+        composable(Routes.WELCOME) {
+            WelcomeScreen(onDecouvrir = { navController.navigate(Routes.MAIN) })
         }
         composable(Routes.MAIN) {
             val tabs = listOf("Services", "Observations", "Profile")
