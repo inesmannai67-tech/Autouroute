@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "461475748389",
+    "project_id": "autouroute-28e91",
+    "storage_bucket": "autouroute-28e91.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:461475748389:android:1e80c14dee113d84a33dcc",
+        "android_client_info": {
+          "package_name": "com.example.autouroute"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFkEY1Kj1g02-q3F7Al37Xx7OekWChd_g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
