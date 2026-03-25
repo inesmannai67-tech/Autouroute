@@ -7,7 +7,7 @@ $dbname = "autouroute";  // Must match: CREATE DATABASE autouroute; (see databas
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
-    // Don't die() - let auth.php return proper JSON so the app can show the error
-    $conn = null;
+    // If connection fails, keep $conn but line 19 in auth.php will check $conn->connect_error
+    // This is safer than setting it to null immediately
 }
 ?>

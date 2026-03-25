@@ -16,8 +16,8 @@ function jsonError($msg) {
     exit;
 }
 
-if ($conn === null) {
-    jsonError("Database connection failed. Start XAMPP MySQL.");
+if (!$conn || $conn->connect_error) {
+    jsonError("Database connection failed. Check your XAMPP MySQL and 'autouroute' database. Error: " . ($conn ? $conn->connect_error : "Connection failed"));
 }
 
 /**
