@@ -28,6 +28,9 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.example.autouroute.data.ApiClient
 import com.example.autouroute.data.Strings
+import androidx.compose.foundation.clickable
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import kotlinx.coroutines.launch
 import com.example.autouroute.ui.theme.OtpGray
 import com.example.autouroute.ui.theme.Primary
@@ -87,7 +90,7 @@ fun AuthDialog(
                     modifier = Modifier.weight(1f),
                     colors = ButtonDefaults.outlinedButtonColors(contentColor = Primary)
                 ) {
-                    Text(Strings.ANNULER, fontSize = 18.sp)
+                    Text(Strings.ANNULER, fontSize = 16.sp)
                 }
                 Button(
                     onClick = {
@@ -121,10 +124,32 @@ fun AuthDialog(
                             modifier = Modifier.size(24.dp)
                         )
                     } else {
-                        Text(Strings.VALIDER, fontSize = 18.sp, color = Color.White)
+                        Text(Strings.VALIDER, fontSize = 16.sp, color = Color.White)
                     }
                 }
             }
+            
+            Spacer(Modifier.height(16.dp))
+            
+            Text(
+                text = "Renvoyer le code",
+                color = Primary,
+                textDecoration = TextDecoration.Underline,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        coroutineScope.launch {
+                            val (success, message) = ApiClient.authRequest(
+                                action = "login", // Reuse login to resend OTP
+                                phone = phone
+                            )
+                            if (success) {
+                                Toast.makeText(context, "Nouveau code envoyé (Test: $message)", Toast.LENGTH_LONG).show()
+                            }
+                        }
+                    },
+                textAlign = TextAlign.Center
+            )
         }
     }
 }

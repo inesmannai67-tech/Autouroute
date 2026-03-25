@@ -27,9 +27,12 @@ import androidx.compose.material.icons.filled.PhotoLibrary
 import androidx.compose.material.icons.filled.RadioButtonChecked
 import androidx.compose.material.icons.outlined.RadioButtonUnchecked
 import androidx.compose.material3.AlertDialog
+import androidx.compose.foundation.layout.Box
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -54,6 +57,14 @@ import com.example.autouroute.ui.theme.Primary
 import com.example.autouroute.ui.theme.TextDark
 import com.example.autouroute.ui.theme.TextGray
 import java.io.File
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.Priority
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.MarkerState
+import com.google.maps.android.compose.rememberCameraPositionState
 
 val reportTypes = mapOf(
     "entretien" to Pair("Entretient des Routes", listOf(
@@ -88,13 +99,41 @@ fun ReportScreen(
     type: String,
     onValider: () -> Unit
 ) {
+    val context = LocalContext.current
     val config = reportTypes[type] ?: reportTypes["entretien"]!!
     val (title, options) = config
     val isDark = type == "securite"
     var selected by remember { mutableStateOf<Int?>(null) }
     var selectedImageUri by remember { mutableStateOf<Uri?>(null) }
     var showPhotoOptionsDialog by remember { mutableStateOf(false) }
-    val context = LocalContext.current
+    
+    // Location state
+    var userLocation by remember { mutableStateOf<LatLng?>(null) }
+    var isFetchingLocation by remember { mutableStateOf(false) }
+    val fusedLocationClient = remember { LocationServices.getFusedLocationProviderClient(context) }
+    
+    val cameraPositionState = rememberCameraPositionState {
+        position = CameraPosition.fromLatLngZoom(LatLng(35.5, 10.6), 6f) // Centered on Tunisia
+    }
+
+    val locationPermissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        if (permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true ||
+            permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true
+        ) {
+            isFetchingLocation = true
+            fusedLocationClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
+                .addOnSuccessListener { loc ->
+                    isFetchingLocation = false
+                    if (loc != null) {
+                        val latLng = LatLng(loc.latitude, loc.longitude)
+                        userLocation = latLng
+                        cameraPositionState.position = CameraPosition.fromLatLngZoom(latLng, 15f)
+                    }
+                }
+        }
+    }
 
     val takePictureLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.TakePicture()
@@ -225,8 +264,73 @@ fun ReportScreen(
                     Text(label, fontSize = 16.sp, color = TextDark, modifier = Modifier.weight(1f))
                 }
             }
-            Spacer(Modifier.height(16.dp))
-            PrimaryButton(text = Strings.VALIDER, onClick = onValider)
+            Spacer(Modifier.height(24.dp))
+            
+            // Location Section (Forced)
+            Text(
+                Strings.LOCATION_TITLE,
+                fontSize = 18.sp,
+                color = Primary,
+                modifier = Modifier.padding(bottom = 12.dp)
+            )
+            
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+                    .background(cardBg, RoundedCornerShape(16.dp))
+                    .padding(4.dp)
+            ) {
+                if (userLocation != null) {
+                    GoogleMap(
+                        modifier = Modifier.fillMaxSize(),
+                        cameraPositionState = cameraPositionState
+                    ) {
+                        Marker(
+                            state = MarkerState(position = userLocation!!),
+                            title = "Ma position"
+                        )
+                    }
+                } else {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .clickable {
+                                locationPermissionLauncher.launch(
+                                    arrayOf(
+                                        Manifest.permission.ACCESS_FINE_LOCATION,
+                                        Manifest.permission.ACCESS_COARSE_LOCATION
+                                    )
+                                )
+                            },
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        if (isFetchingLocation) {
+                            CircularProgressIndicator(color = Primary)
+                        } else {
+                            Text(Strings.LOCATION_SHARE, color = TextDark)
+                        }
+                    }
+                }
+            }
+
+            Spacer(Modifier.height(32.dp))
+            
+            PrimaryButton(
+                text = Strings.VALIDER, 
+                onClick = {
+                    if (selected == null) {
+                        Toast.makeText(context, "Veuillez sélectionner un type de problème", Toast.LENGTH_SHORT).show()
+                        return@PrimaryButton
+                    }
+                    if (userLocation == null) {
+                        Toast.makeText(context, "Localisation GPS obligatoire pour envoyer", Toast.LENGTH_SHORT).show()
+                        return@PrimaryButton
+                    }
+                    onValider()
+                }
+            )
         }
     }
 }

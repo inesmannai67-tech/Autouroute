@@ -25,4 +25,6 @@ debug_log.txt
 full_error.txt
 
 # React Native / Expo (optional - remove if you want to track mobile/)
-/mobile/
+# JVM logs
+hs_err_*.log
+replay_*.log

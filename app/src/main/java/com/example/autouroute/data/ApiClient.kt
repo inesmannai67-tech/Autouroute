@@ -10,7 +10,7 @@ import java.net.URL
 
 object ApiClient {
     // CHANGE THIS: Run ipconfig on PC, use your IPv4. Phone + PC on same WiFi.
-    private const val BASE_URL = "http://172.29.137.13/Autouroute-main/api/"
+    private const val BASE_URL = "http://192.168.1.178/Autouroute-master/api/"
 
     suspend fun authRequest(
         action: String,

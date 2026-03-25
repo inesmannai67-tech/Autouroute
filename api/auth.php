@@ -17,7 +17,34 @@ function jsonError($msg) {
 }
 
 if ($conn === null) {
-    jsonError("Database connection failed. Start XAMPP MySQL and run database_schema.sql in phpMyAdmin.");
+    jsonError("Database connection failed. Start XAMPP MySQL.");
+}
+
+/**
+ * Sends a real SMS using WinSMS or similar provider
+ * (You need to create an account on winsms.tn and get your API key)
+ */
+function sendSMS($phone, $otp) {
+    // 1. MOCK (Default): Just logs the SMS or sends it to a log file
+    $msg = "Votre code de verification Autouroute est: $otp";
+    file_put_contents("sms_log.txt", "[" . date("Y-m-d H:i:s") . "] SMS to $phone: $msg\n", FILE_APPEND);
+    
+    // 2. REAL INTEGRATION (Uncomment and add your credentials to use WinSMS.tn)
+    /*
+    $api_id = "VOTRE_ID_WINSMS";
+    $api_password = "VOTRE_PASSWORD_WINSMS";
+    $sender = "Autouroute";
+    $url = "https://www.winsms.tn/extract/index2.php?ID=$api_id&Password=$api_password&Mobile=$phone&SenderName=$sender&Message=" . urlencode($msg);
+    @file_get_contents($url);
+    */
+    
+    // 3. TWILIO Example
+    /*
+    $sid = "VOTRE_TWILIO_SID";
+    $token = "VOTRE_TWILIO_TOKEN";
+    $from = "+123456789"; 
+    // Use Twilio PHP SDK or cURL here
+    */
 }
 
 $raw = file_get_contents("php://input");
@@ -58,6 +85,7 @@ if ($action === "register") {
         jsonError("Database write failed: " . $conn->error);
     }
 
+    sendSMS($num_telephone, $otp);
     echo json_encode(["success" => true, "message" => "OTP envoyé", "otp" => $otp]);
 
 } elseif ($action === "login") {
@@ -78,6 +106,7 @@ if ($action === "register") {
 
     $otp = str_pad(rand(1000, 9999), 4, "0", STR_PAD_LEFT);
     $conn->query("UPDATE users SET otp='$otp' WHERE num_telephone='$num_telephone'");
+    sendSMS($num_telephone, $otp);
     echo json_encode(["success" => true, "message" => "OTP envoyé", "otp" => $otp]);
 
 } elseif ($action === "verify") {

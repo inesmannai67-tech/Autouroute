@@ -2,9 +2,9 @@
 -- Run in phpMyAdmin: http://localhost/phpmyadmin
 -- Or: mysql -u root < database_schema.sql
 
-CREATE DATABASE IF NOT EXISTS autouroute;
-USE autouroute;
-
+SET FOREIGN_KEY_CHECKS = 0;
+DROP TABLE IF EXISTS otp_codes;
+DROP TABLE IF EXISTS sessions;
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
