@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="100.0"
+    android:viewportHeight="100.0">
+    <!-- Star and crescent representing Tunisian flag styling, simplified -->
+    <path
+        android:fillColor="#E50000"
+        android:pathData="M 50 10 C 27.909 10 10 27.909 10 50 C 10 72.091 27.909 90 50 90 C 72.091 90 90 72.091 90 50 C 90 27.909 72.091 10 50 10 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M 50 25 C 36.193 25 25 36.193 25 50 C 25 63.807 36.193 75 50 75 C 63.807 75 75 63.807 75 50 C 75 36.193 63.807 25 50 25 Z" />
+    <path
+        android:fillColor="#E50000"
+        android:pathData="M 52 30 C 40.954 30 32 38.954 32 50 C 32 61.046 40.954 70 52 70 C 47.954 70 42 66.046 42 50 C 42 33.954 47.954 30 52 30 Z" />
+    <!-- Center star -->
+    <path
+        android:fillColor="#E50000"
+        android:pathData="M 60 50 L 53 52 L 53 59 L 48 54 L 41 56 L 46 50 L 41 44 L 48 46 L 53 41 L 53 48 Z" />
+</vector>
