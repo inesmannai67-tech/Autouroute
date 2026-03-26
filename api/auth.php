@@ -55,9 +55,12 @@ if ($action === "register") {
     }
 
     if (!$ok) {
+        error_log("INSERT/UPDATE failed for phone: $num_telephone. Error: " . $conn->error);
         jsonError("Database write failed: " . $conn->error);
     }
 
+    // Log successful registration/update
+    error_log("User registered/updated: $num_telephone");
     echo json_encode(["success" => true, "message" => "OTP envoyé", "otp" => $otp]);
 
 } elseif ($action === "login") {
