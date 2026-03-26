@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="300dp"
+    android:height="300dp"
+    android:viewportWidth="300"
+    android:viewportHeight="300">
+
+    <!-- Ground line -->
+    <path
+        android:strokeColor="#28223d"
+        android:strokeWidth="2"
+        android:pathData="M 60 250 L 240 250" />
+
+    <!-- Left Person (Male) -->
+    <!-- Legs -->
+    <path
+        android:fillColor="#E53935"
+        android:pathData="M 115 250 L 110 200 L 125 200 L 130 250 Z" />
+    <!-- Body/Shirt -->
+    <path
+        android:fillColor="#64B5F6"
+        android:pathData="M 110 200 L 100 160 Q 115 145 130 160 L 125 200 Z" />
+    <!-- Arms -->
+    <path
+        android:strokeColor="#64B5F6"
+        android:strokeWidth="8"
+        android:strokeLineCap="round"
+        android:pathData="M 105 170 L 80 140" />
+    <path
+        android:strokeColor="#64B5F6"
+        android:strokeWidth="8"
+        android:strokeLineCap="round"
+        android:pathData="M 125 170 L 145 130" />
+    <!-- Head -->
+    <path
+        android:fillColor="#FFCCBC"
+        android:pathData="M 110 145 A 8 8 0 1 0 126 145 A 8 8 0 1 0 110 145 Z" />
+    <!-- Hair -->
+    <path
+        android:fillColor="#6D4C41"
+        android:pathData="M 110 138 Q 118 130 126 138 L 124 142 L 112 142 Z" />
+
+    <!-- Right Person (Female) -->
+    <!-- Legs -->
+    <path
+        android:fillColor="#64B5F6"
+        android:pathData="M 180 250 L 170 220 L 195 180 L 210 195 L 225 240 Z" />
+    <!-- Body/Shirt -->
+    <path
+        android:fillColor="#E53935"
+        android:pathData="M 185 185 L 175 145 Q 195 135 210 145 L 205 185 Z" />
+    <!-- Arms -->
+    <path
+        android:strokeColor="#E53935"
+        android:strokeWidth="8"
+        android:strokeLineCap="round"
+        android:pathData="M 180 155 L 165 120" />
+    <path
+        android:strokeColor="#E53935"
+        android:strokeWidth="8"
+        android:strokeLineCap="round"
+        android:pathData="M 205 155 L 230 140" />
+    <!-- Head -->
+    <path
+        android:fillColor="#FFCCBC"
+        android:pathData="M 185 135 A 8 8 0 1 0 201 135 A 8 8 0 1 0 185 135 Z" />
+    <!-- Hair -->
+    <path
+        android:fillColor="#6D4C41"
+        android:pathData="M 182 135 Q 180 110 210 130 L 205 150 Q 185 145 182 135 Z" />
+
+    <!-- Decorative elements -->
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M 130 110 A 5 5 0 1 0 140 110 A 5 5 0 1 0 130 110" />
+    <path
+        android:fillColor="#81C784"
+        android:pathData="M 166 90 A 4 4 0 1 0 174 90 A 4 4 0 1 0 166 90" />
+    <path
+        android:fillColor="#B0BEC5"
+        android:pathData="M 117 120 A 3 3 0 1 0 123 120 A 3 3 0 1 0 117 120" />
+    
+    <!-- Central star/thumps up icon -->
+    <path
+        android:fillColor="#FFB300"
+        android:pathData="M 155 80 L 158 88 L 166 88 L 160 94 L 163 102 L 155 97 L 147 102 L 150 94 L 144 88 L 152 88 Z" />
+
+</vector>

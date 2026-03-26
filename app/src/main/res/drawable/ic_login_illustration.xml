@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200.0"
+    android:viewportHeight="200.0">
+
+    <!-- Stylized phone outline -->
+    <path
+        android:fillColor="#ffffff"
+        android:strokeColor="#e0e0e0"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M 60,30 L 140,30 Q 150,30 150,40 L 150,170 Q 150,180 140,180 L 60,180 Q 50,180 50,170 L 50,40 Q 50,30 60,30 Z" />
+
+    <!-- Phone screen cutout/notch -->
+    <path
+        android:fillColor="#e0e0e0"
+        android:pathData="M 85,30 L 115,30 Q 120,30 120,35 L 120,35 Q 120,40 115,40 L 85,40 Q 80,40 80,35 L 80,35 Q 80,30 85,30 Z" />
+
+    <!-- Form UI inside phone -->
+    <path
+        android:fillColor="#f0f0f0"
+        android:pathData="M 70,60 L 130,60 L 130,110 L 70,110 Z" />
+    
+    <!-- Dots for loading or progress in the phone -->
+    <path
+        android:fillColor="#b0bcc2"
+        android:pathData="M 80,120 A 2,2 0 1,0 84,120 A 2,2 0 1,0 80,120 Z" />
+    <path
+        android:fillColor="#b0bcc2"
+        android:pathData="M 90,120 A 2,2 0 1,0 94,120 A 2,2 0 1,0 90,120 Z" />
+    <path
+        android:fillColor="#b0bcc2"
+        android:pathData="M 100,120 A 2,2 0 1,0 104,120 A 2,2 0 1,0 100,120 Z" />
+    
+    <path
+        android:fillColor="#e0e0e0"
+        android:pathData="M 70,130 L 130,130 L 130,132 L 70,132 Z" />
+
+    <path
+        android:fillColor="#b0bcc2"
+        android:pathData="M 80,140 A 2,2 0 1,0 84,140 A 2,2 0 1,0 80,140 Z" />
+    <path
+        android:fillColor="#b0bcc2"
+        android:pathData="M 90,140 A 2,2 0 1,0 94,140 A 2,2 0 1,0 90,140 Z" />
+    <path
+        android:fillColor="#b0bcc2"
+        android:pathData="M 100,140 A 2,2 0 1,0 104,140 A 2,2 0 1,0 100,140 Z" />
+
+    <path
+        android:fillColor="#e0e0e0"
+        android:pathData="M 70,150 L 130,150 L 130,152 L 70,152 Z" />
+
+    <!-- Button inside phone -->
+    <path
+        android:fillColor="#1565C0"
+        android:pathData="M 100,160 L 130,160 L 130,168 L 100,168 Z" />
+
+    <!-- Circles in the phone graph -->
+    <path
+        android:fillColor="#d0d6d9"
+        android:pathData="M 80,85 A 10,10 0 1,0 100,85 A 10,10 0 1,0 80,85 Z" />
+    <path
+        android:fillColor="#b0bcc2"
+        android:pathData="M 90,85 A 10,10 0 1,0 110,85 A 10,10 0 1,0 90,85 Z" />
+    <path
+        android:fillColor="#1565C0"
+        android:pathData="M 100,85 A 10,10 0 1,0 120,85 A 10,10 0 1,0 100,85 Z" />
+
+    <!-- Abstract human figure -->
+    <path
+        android:fillColor="#28223d"
+        android:pathData="M 145,180 L 152,145 L 168,145 L 172,180 Z" /> <!-- Legs -->
+    
+    <path
+        android:fillColor="#1565C0"
+        android:pathData="M 148,145 L 152,120 A 5,5 0 0,1 168,120 L 168,145 Z" /> <!-- Body -->
+        
+    <path
+        android:fillColor="#ffb5a7"
+        android:pathData="M 152,110 A 6,6 0 1,0 164,110 A 6,6 0 1,0 152,110 Z" /> <!-- Head -->
+
+    <path
+        android:fillColor="#28223d"
+        android:pathData="M 150,108 A 6,6 0 0,1 166,108 L 160,102 L 156,102 Z" /> <!-- Hair -->
+
+    <path
+        android:fillColor="#1565C0"
+        android:pathData="M 148,122 L 140,135 L 145,138 L 152,125 Z" /> <!-- Left Arm -->
+        
+    <path
+        android:fillColor="#ffb5a7"
+        android:pathData="M 138,135 A 2,2 0 1,0 142,135 A 2,2 0 1,0 138,135 Z" /> <!-- Left Hand -->
+
+</vector>

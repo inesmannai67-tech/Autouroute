@@ -1,0 +1,28 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# IDE
+/.idea/
+.idea/
+
+# Local build/test logs
+build_log.txt
+build_result.txt
+debug_log.txt
+full_error.txt
+
+# React Native / Expo (optional - remove if you want to track mobile/)
+/mobile/
