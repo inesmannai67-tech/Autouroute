@@ -12,7 +12,7 @@ object ApiClient {
     // For physical device: use your PC's WiFi IP (phone + PC must be on same WiFi)
     // For emulator only: change to http://10.0.2.2/Autouroute-master/api/
     // NOTE: If your PC IPv4 changes, update this value (see `ipconfig`).
-    private const val BASE_URL = "http://192.168.1.153/Autouroute-master/api/"
+    private const val BASE_URL = "http://192.168.1.154/Autouroute-master/api/"
 
     suspend fun authRequest(
         action: String,
